@@ -1,37 +1,23 @@
 import {
   Box,
   Flex,
-  Text,
   IconButton,
   Button,
   Stack,
   Collapse,
-  Icon,
   Link,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
   List,
   ListItem,
   Image,
   useColorMode,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-  MoonIcon,
-  SunIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 
 import NextLink from "next/link";
 
 import { NavItem } from "./types";
-import { px } from "framer-motion";
 
 export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
@@ -40,14 +26,13 @@ export default function Navbar() {
   return (
     <Box as="nav">
       <Flex
-        bg={useColorModeValue("white", "gray.800")}
-        color={useColorModeValue("gray.600", "white")}
+        bg={useColorModeValue("secondary.100", "secondary.800")}
+        color={useColorModeValue("primary.900", "secondary.50")}
         minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
+        borderStyle={"none"}
         align={"center"}
       >
         <Flex
@@ -60,19 +45,14 @@ export default function Navbar() {
             icon={
               isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
             }
+            colorScheme={"primary"}
             variant={"ghost"}
             aria-label={"Toggle Navigation"}
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Link as={NextLink} href="/">
-            <Image
-              src="/logo.png"
-              alt="NEU Blockchain"
-              h="48px"
-              w="auto"
-              // objectFit="cover"
-            />
+            <Image src="/logo.png" alt="NEU Blockchain" h="48px" w="auto" />
           </Link>
 
           <Flex display={{ base: "none", md: "flex" }} ml={20}>
@@ -81,9 +61,13 @@ export default function Navbar() {
         </Flex>
 
         <Flex flex={{ base: 1, md: 0 }} justify={"flex-end"}>
-          <Button onClick={toggleColorMode}>
-            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </Button>
+          <IconButton
+            onClick={toggleColorMode}
+            aria-label={"Toggle Theme"}
+            icon={colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+            colorScheme={"secondary"}
+            variant={"ghost"}
+          />
         </Flex>
       </Flex>
 
@@ -95,10 +79,6 @@ export default function Navbar() {
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue("gray.600", "gray.200");
-  const linkHoverColor = useColorModeValue("gray.800", "white");
-  const popoverContentBgColor = useColorModeValue("white", "gray.800");
-
   return (
     <Stack as={List} direction={"row"} spacing={12} align="center">
       {NAV_ITEMS.map((navItem) => (
@@ -116,7 +96,7 @@ const MobileNav = () => {
   return (
     <Stack
       as={List}
-      bg={useColorModeValue("white", "gray.800")}
+      bg={useColorModeValue("secondary.100", "secondary.800")}
       p={4}
       display={{ md: "none" }}
     >
