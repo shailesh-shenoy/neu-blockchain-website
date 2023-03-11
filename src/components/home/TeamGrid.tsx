@@ -1,13 +1,17 @@
+import { TeamGridProps } from "./types";
 import {
+  Card,
   Container,
   Flex,
   Heading,
+  SimpleGrid,
   Stack,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import ProfileCard from "./ProfileCard";
 
-export default function TeamGrid() {
+export default function TeamGrid({ users }: TeamGridProps) {
   return (
     <Flex
       as="section"
@@ -24,13 +28,24 @@ export default function TeamGrid() {
         >
           Meet the team
         </Heading>
-        <Text color={"gray.500"}>
+        <Text color={"secondary.500"}>
           NEU Blockchain Club boasts a team of researchers, developers, &
           blockchain enthusiasts from a wide range of backgrounds - from
           Business & Psychology majors to CS grads. This diversity helps us form
           disruptive ideas from varied perspectives to realize the promise of
           blockchain and web3.
         </Text>
+        {users && (
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacingX={4}
+            spacingY={10}
+          >
+            {users.map((u) => {
+              return <ProfileCard user={u} key={u.id} />;
+            })}
+          </SimpleGrid>
+        )}
       </Stack>
     </Flex>
   );

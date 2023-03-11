@@ -4,14 +4,11 @@ import TeamGrid from "@/components/home/TeamGrid";
 import { User } from "@/payload-types";
 import { GetStaticProps } from "next";
 
-export default function Home({ users }: Props) {
+export default function Home({ users }: HomeProps) {
   return (
     <>
       <Hero />
-      <TeamGrid />
-      {users.map((u) => {
-        return <div key={u.name}>{u.name}</div>;
-      })}
+      <TeamGrid users={users} />
     </>
   );
 }
@@ -24,6 +21,9 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     updatedAt: "y",
     roles: ["admin", "developer"],
     name: "Shailesh",
+    title: "Developer",
+    description:
+      "Shailesh is a Full Stack developer looking to break into web3 development. He is part of our tech team and the developer of this website!",
   });
   users.push({
     id: "2",
@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     updatedAt: "z",
     roles: ["admin"],
     name: "ABC",
+    title: "Co-President",
   });
   users.push({
     id: "3",
@@ -38,6 +39,16 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     updatedAt: "x",
     roles: ["developer"],
     name: "XYZ",
+    title: "Marketing Head",
+  });
+
+  users.push({
+    id: "4",
+    createdAt: "z",
+    updatedAt: "x",
+    roles: ["developer"],
+    name: "YOU",
+    title: "What do you want to be?",
   });
 
   return {
@@ -47,7 +58,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   };
 };
 
-export type Props = {
+export type HomeProps = {
   users: User[];
   statusCode: number;
 };
