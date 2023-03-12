@@ -18,13 +18,13 @@ export default function TeamGrid({ users }: TeamGridProps) {
       direction="column"
       align="center"
       bg={useColorModeValue("secondary.100", "secondary.800")}
-      p={{ base: 3, md: 3, lg: 6 }}
+      p={{ base: 6, md: 6, lg: 12 }}
     >
-      <Stack direction="column" spacing={{ base: "6", md: "8" }} maxW={"4xl"}>
+      <Stack direction="column" spacing={{ base: "6", md: "8" }} maxW={"7xl"}>
         <Heading
           lineHeight={1.1}
-          fontWeight={400}
-          fontSize={{ base: "xl", sm: "2xl", lg: "3xl" }}
+          fontWeight={600}
+          fontSize={{ base: "2xl", sm: "3xl", lg: "5xl" }}
         >
           Meet the team
         </Heading>
@@ -38,11 +38,11 @@ export default function TeamGrid({ users }: TeamGridProps) {
         {users && (
           <SimpleGrid
             columns={{ base: 1, md: 2, lg: 3 }}
-            spacingX={4}
+            spacingX={6}
             spacingY={10}
           >
-            {users.map((u) => {
-              return <ProfileCard user={u} key={u.id} />;
+            {users?.map((user) => {
+              return <ProfileCard user={user} key={user.id} />;
             })}
           </SimpleGrid>
         )}

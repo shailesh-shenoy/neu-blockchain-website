@@ -1,4 +1,5 @@
 import { ProfileProps } from "./types";
+import { Media } from "../../../payload-types";
 import {
   Heading,
   Avatar,
@@ -15,6 +16,9 @@ import {
 
 export default function ProfileCard({ user }: ProfileProps) {
   const defaultPhoto = "/default-profile.jpg";
+
+  const userPhotoObj: any = user.photo?.valueOf();
+  const userPhoto: string = userPhotoObj?.sizes?.feature?.url ?? defaultPhoto;
   return (
     <Stack
       py={6}
@@ -24,10 +28,10 @@ export default function ProfileCard({ user }: ProfileProps) {
       boxShadow={"2xl"}
     >
       <Image
-        src={user.photo ? user.photo.toString() : defaultPhoto}
+        src={userPhoto}
         rounded="full"
         alt={user.name + "'s photo"}
-        w={"80%"}
+        w={{ base: "50%", md: "60%", lg: "70%" }}
       />
       <Heading fontSize={"2xl"} fontFamily={"body"}>
         {user.name}
@@ -40,7 +44,7 @@ export default function ProfileCard({ user }: ProfileProps) {
       </Text>
 
       <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
-        {user.roles.map((r) => {
+        {user.roles?.map((r) => {
           return (
             <Badge
               key={r}
